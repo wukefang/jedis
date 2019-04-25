@@ -1172,6 +1172,13 @@ public class BinaryClient extends Connection {
         args.addAll(params.getParams());
         sendCommand(HSCAN, args.toArray(new byte[args.size()][]));
     }
+    public void ehscan(final byte[] key, final byte[] cursor, final ScanParams params) {
+        final List<byte[]> args = new ArrayList<byte[]>();
+        args.add(key);
+        args.add(cursor);
+        args.addAll(params.getParams());
+        sendCommand(EHSCAN, args.toArray(new byte[args.size()][]));
+    }
 
     public void sscan(final byte[] key, final byte[] cursor, final ScanParams params) {
         final List<byte[]> args = new ArrayList<byte[]>();

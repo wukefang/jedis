@@ -3,6 +3,8 @@ package redis.clients.jedis.tests;
 import org.junit.Before;
 import org.junit.Test;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.ScanParams;
+import redis.clients.jedis.ScanResult;
 
 import java.util.*;
 
@@ -135,10 +137,10 @@ public class EHashTest {
         Jedis.TemporaryEntry entry2 = new Jedis.TemporaryEntry("ehmsetex2", "good2", 1000);
         Jedis.TemporaryEntry entry3 = new Jedis.TemporaryEntry("ehmsetex3", "good3", 1000);
 
-        System.out.println(jedis.ehmsetex("hello", entry1,entry2,entry3));
+        System.out.println(jedis.ehmsetex("hello", entry1, entry2, entry3));
 
 
-        System.out.println(jedis.ehmget("hello", "ehmsetex1", "ehmsetex2","ehmsetex3"));
+        System.out.println(jedis.ehmget("hello", "ehmsetex1", "ehmsetex2", "ehmsetex3"));
         System.out.println(jedis.ehttl("hello", "ehmsetex1"));
         System.out.println(jedis.ehttl("hello", "ehmsetex2"));
         System.out.println(jedis.ehttl("hello", "ehmsetex3"));
@@ -150,7 +152,34 @@ public class EHashTest {
         Jedis.TemporaryEntry entry2 = new Jedis.TemporaryEntry("ehkeys2", "good2", 1000);
         Jedis.TemporaryEntry entry3 = new Jedis.TemporaryEntry("ehkeys3", "good3", 1000);
 
-        System.out.println(jedis.ehmsetex("hello", entry1,entry2,entry3));
+        System.out.println(jedis.ehmsetex("hello", entry1, entry2, entry3));
         System.out.println(jedis.ehkeys("hello"));
+    }
+
+    @Test
+    public void ehscan() {
+
+
+        System.out.println(jedis.ehkeys("hello"));
+
+        List<String> list = new ArrayList<>();
+        ScanParams params = new ScanParams();
+        params.match("eh*");
+        params.count(10);
+        String cursor = "0";
+        while (true) {
+            ScanResult scanResult = jedis.ehscan("hello", cursor, params);
+            List<String> elements = scanResult.getResult();
+            if (elements != null && elements.size() > 0) {
+                list.addAll(elements);
+            }
+            cursor = scanResult.getCursor();
+            System.out.println("cursor ==> " + cursor);
+            if ("0".equals(cursor)) {
+                break;
+            }
+        }
+        System.out.println(list);
+
     }
 }

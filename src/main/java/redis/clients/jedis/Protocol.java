@@ -263,7 +263,7 @@ public final class Protocol {
         // for ehash
         EHSET, EHGET, EHSETEX, EHINCRBY, EHINCRBYFLOAT, EHVALS, EHGETALL,
         EHSETNX, EHEXPIRE, EHTTL, EHEXPIREAT, EHEXISTS, EHDEL, EHLEN, EHSTRLEN,
-        EHMSET, EHMGET, EHMSETEX, EHKEYS;
+        EHMSET, EHMGET, EHMSETEX, EHKEYS, EHSCAN;
 
         private final byte[] raw;
 

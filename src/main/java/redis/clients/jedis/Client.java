@@ -1245,4 +1245,8 @@ public class Client extends BinaryClient implements Commands {
     public void ehkeys(String key) {
         ehkeys(SafeEncoder.encode(key));
     }
+
+    public void ehscan(String key, String cursor, ScanParams params) {
+        ehscan(SafeEncoder.encode(key), SafeEncoder.encode(cursor), params);
+    }
 }
