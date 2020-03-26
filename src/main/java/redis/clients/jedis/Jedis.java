@@ -949,6 +949,12 @@ public class Jedis extends BinaryJedis implements JedisCommands, MultiKeyCommand
         return client.getIntegerReply();
     }
 
+    public Long ehincrBy(final String key, final String field, final long value,final String option,final int seconds) {
+        checkIsInMultiOrPipeline();
+        client.ehincrBy(key, field, value, option, seconds);
+        return client.getIntegerReply();
+    }
+
     /**
      * Increment the number stored at field in the hash at key by a double precision floating point
      * value. If key does not exist, a new key holding a hash is created. If field does not exist or

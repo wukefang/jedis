@@ -348,6 +348,10 @@ public class BinaryClient extends Connection {
         sendCommand(EHINCRBY, key, field, toByteArray(value));
     }
 
+    public void ehincrBy(final byte[] key, final byte[] field, final long value,final byte[] option,final int seconds) {
+        sendCommand(EHINCRBY, key, field, toByteArray(value),option,toByteArray(seconds));
+    }
+
     public void hexists(final byte[] key, final byte[] field) {
         sendCommand(HEXISTS, key, field);
     }

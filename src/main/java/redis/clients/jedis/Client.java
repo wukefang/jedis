@@ -1179,6 +1179,10 @@ public class Client extends BinaryClient implements Commands {
         ehincrBy(SafeEncoder.encode(key), SafeEncoder.encode(field), value);
     }
 
+    public void ehincrBy(String key, String field, long value,final String option,final int seconds) {
+        ehincrBy(SafeEncoder.encode(key), SafeEncoder.encode(field), value, SafeEncoder.encode(option), seconds);
+    }
+
     public void ehincrByFloat(String key, String field, double value) {
         ehincrByFloat(SafeEncoder.encode(key), SafeEncoder.encode(field), value);
     }

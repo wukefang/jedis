@@ -321,4 +321,7 @@ public interface RedisPipeline {
   Response<String> psetex(String key, long milliseconds, String value);
 
   Response<Double> hincrByFloat(String key, String field, double increment);
+
+  Response<Long> ehincrBy(String key, String field, long increment, String option, int seconds);
+
 }

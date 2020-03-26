@@ -1789,4 +1789,10 @@ public abstract class PipelineBase extends Queable implements BinaryRedisPipelin
     return getResponse(BuilderFactory.LONG);
   }
 
+  @Override
+  public Response<Long> ehincrBy(String key, String field, long increment, String option, int seconds) {
+    getClient(key).ehincrBy(key,field,increment,option,seconds);
+    return getResponse(BuilderFactory.LONG);
+  }
+
 }
